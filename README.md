@@ -37,6 +37,18 @@ bitbake rauc-bundle-demo
 bitbake core-image-minimal-demo
 ```
 
+Create disk image
+
+```
+wic create mkefidisk -e core-image-minimal-demo
+```
+
+Outside of docker
+```
+sudo dd if=mkefidisk-202305072037-sda.direct of=/dev/sda
+sync
+```
+
 ## Create keys
 
 * See https://rauc.readthedocs.io/en/latest/examples.html#full-system-example
@@ -45,3 +57,5 @@ bitbake core-image-minimal-demo
 openssl req -x509 -newkey rsa:4096 -nodes -keyout demorauc.key.pem -out demorauc.cert.pem -subj "/O=rauc Inc./CN=rauc-demo"
 ```
 
+WARNING: rauc-1.9+gitAUTOINC+dab6882390-r0 do_install: Please overwrite example system.conf with a project specific one!
+WARNING: rauc-1.9+gitAUTOINC+dab6882390-r0 do_install: Please overwrite example ca.cert.pem with a project specific one, or set the RAUC_KEYRING_FILE variable with your file!

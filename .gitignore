@@ -5,3 +5,4 @@ tmp/
 bitbake-cookerdaemon.log
 conf/templateconf.cfg
 bitbake.lock
+mkefidisk-*
