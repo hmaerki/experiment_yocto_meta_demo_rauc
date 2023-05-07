@@ -11,4 +11,4 @@ export ROOT=/workdir
 source $ROOT/sources/poky/oe-init-build-env "$ROOT/meta-demorauc"
 
 echo "Calling oe-init-build-env $ROOT/meta-demorauc"
-echo "******** Welcome to yocto! ********"
+echo "******** Welcome to demorauc! ********"
