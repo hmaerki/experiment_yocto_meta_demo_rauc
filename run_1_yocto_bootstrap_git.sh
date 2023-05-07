@@ -4,6 +4,7 @@ set -eou pipefail
 GIT_OE=https://git.openembedded.org
 GIT_YOCTO=https://git.yoctoproject.org
 GIT_XILINX=https://github.com/xilinx
+GIT_RAUC=https://github.com/rauc
 
 
 DIRECTORY_OF_THIS_FILE=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
@@ -33,3 +34,5 @@ git_checkout () {
 }
 
 git_checkout $GIT_YOCTO  poky kirkstone sources
+# git_checkout $GIT_YOCTO  meta-yocto kirkstone sources
+git_checkout $GIT_RAUC  meta-rauc kirkstone sources
