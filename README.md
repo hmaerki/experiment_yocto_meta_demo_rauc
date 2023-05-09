@@ -35,6 +35,9 @@ Build
 source ./meta-demorauc/run_2_docker_init-build-env.sh
 bitbake rauc-bundle-demo
 bitbake core-image-minimal-demo
+runqemu qemux86-64 slirp nographic core-image-minimal-demo
+
+runqemu slirp nographic tmp/deploy/images/qemux86-64/core-image-minimal-demo-qemux86-64.qemuboot.conf
 ```
 
 Create disk image
@@ -57,5 +60,30 @@ sync
 openssl req -x509 -newkey rsa:4096 -nodes -keyout demorauc.key.pem -out demorauc.cert.pem -subj "/O=rauc Inc./CN=rauc-demo"
 ```
 
+## Current issues - A
+
+```
 WARNING: rauc-1.9+gitAUTOINC+dab6882390-r0 do_install: Please overwrite example system.conf with a project specific one!
 WARNING: rauc-1.9+gitAUTOINC+dab6882390-r0 do_install: Please overwrite example ca.cert.pem with a project specific one, or set the RAUC_KEYRING_FILE variable with your file!
+```
+
+**dbus points to wrong socket**
+
+* https://www.phytec.de/cdocuments/?doc=A4AGG&cHash=f5f76292d778ec54a7602e840cf7a01b
+* https://github.com/rauc/rauc/issues/722
+
+
+```
+rauc status
+grep -R /run/dbus/system_bus_socket /usr/share/
+rm /var/run/dbus/system_bus_socket
+ln -s /run/dbus/system_bus_socket /var/run/dbus/system_bus_socket
+```
+
+Workaround
+
+```
+root@qemux86-64:/var# DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket
+root@qemux86-64:/var# rauc status
+```
+
